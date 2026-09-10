@@ -1,0 +1,28 @@
+# Package manager and dependencies
+node_modules/
+pnpm-lock.yaml
+
+# Build and compilation outputs
+dist/
+build/
+*.tsbuildinfo
+
+# Test and coverage artifacts
+coverage/
+.nyc_output/
+
+# Database migrations (generated SQL/snapshots should not be reformatted)
+drizzle/
+
+# Environment files
+.env
+.env.*
+
+# Logs
+logs/
+*.log
+
+# Caches
+.cache/
+.temp/
+.tmp/
