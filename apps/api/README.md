@@ -27,7 +27,7 @@ A robust, enterprise-grade, production-ready backend boilerplate built with **No
 
 - **Layered Architecture**: Strict separation of concerns (`Routes` ➔ `Middlewares` ➔ `Controllers` ➔ `Services` ➔ `Repositories` ➔ `Database`).
 - **Complete Authentication**: Better Auth integration with Drizzle adapter, handling user accounts, sessions, and verification, with an Express auth middleware (`requireAuth`) injecting `req.user` and `req.session`.
-- **Background Job Queue & Worker**: Dedicated BullMQ email queue backed by Redis with automated retries, exponential backoff, and a standalone worker process (`src/worker.ts`).
+- **Background Job Queue**: Dedicated BullMQ email queue backed by Redis with automated retries and exponential backoff, consumed by the standalone worker service (`apps/worker`).
 - **Secure File Storage (AWS S3)**: Direct-to-bucket upload pattern via presigned URLs (`/getPresignedUrl`) to offload bandwidth from the API server.
 - **Production-Ready Security**: HTTP security headers via Helmet, configurable CORS, and rate limiting with health check exemptions.
 - **Type-Safe Environment Variables**: Strict schema validation with Zod on boot to prevent misconfiguration in any deployment stage.
@@ -56,20 +56,9 @@ A robust, enterprise-grade, production-ready backend boilerplate built with **No
 │   └── libs/                 # Unit tests (e.g. custom error classes)
 └── src/
     ├── app.ts                # Express app setup, middleware stack, & route mounting
-    ├── index.ts              # Server bootstrapper & graceful HTTP/DB shutdown
-    ├── worker.ts             # Dedicated background worker process & graceful shutdown
-    ├── configs/              # Zod environment schemas & Redis client configuration
-    │   ├── configs.ts        # App & environment configuration
-    │   └── redis.ts          # Redis connection configuration
-    ├── controllers/          # HTTP request handlers & response orchestration
-    ├── db/
-    │   ├── client.ts         # PostgreSQL connection pool & Drizzle ORM instance
-    │   └── schema/           # Drizzle table schemas (todos, Better Auth tables)
-    ├── helper/               # Response formatting helpers (sendSuccess)
-    ├── jobs/                 # BullMQ queues, workers, and processors
-    │   ├── helpers/          # Job execution handlers (email sender)
-    │   ├── queues/           # BullMQ queue instances (email-queue)
-    │   └── workers/          # BullMQ worker instances (email.worker)
+    ├── jobs/                 # BullMQ queues and job helpers
+    │   ├── helpers/          # Job execution helpers (email payload types)
+    │   └── queues/           # BullMQ queue instances (email-queue)
     ├── lib/                  # Shared utilities (logger, AppError, response types)
     ├── middlewares/          # Auth, error handler, rate limiter, logger, validator
     ├── repository/           # Data access layer (database queries via Drizzle)
@@ -169,13 +158,13 @@ pnpm dev
 
 The API server starts with live reload at `http://localhost:4000`.
 
-#### Start the Background Worker (Optional / Concurrent Terminal)
+#### Start the Background Worker (Dedicated Service)
 
 ```bash
-pnpm dev:worker
+pnpm --filter worker dev
 ```
 
-The worker will listen for BullMQ jobs (e.g. welcome email notifications).
+The dedicated background worker service (`apps/worker`) will listen for BullMQ jobs (e.g. welcome email notifications).
 
 ---
 
@@ -293,8 +282,7 @@ Content-Type: application/json
 | Script              | Command                                                      | Description                                                   |
 | :------------------ | :----------------------------------------------------------- | :------------------------------------------------------------ |
 | `pnpm dev`          | `dotenvx run -f .env.development -- tsx watch src/index.ts`  | Starts API development server with live reload                |
-| `pnpm dev:worker`   | `dotenvx run -f .env.development -- tsx watch src/worker.ts` | Starts background worker process with live reload             |
-| `pnpm build`        | `node esbuild.config.mjs`                                    | Bundles TypeScript into production JavaScript in `dist/`      |
+| `pnpm build`        | `esbuild src/index.ts ...`                                   | Bundles TypeScript into production JavaScript in `dist/`      |
 | `pnpm start`        | `dotenvx run -f .env -- node dist/index.js`                  | Runs compiled production API server                           |
 | `pnpm test`         | `vitest run`                                                 | Runs test suite once via Vitest                               |
 | `pnpm test:watch`   | `vitest`                                                     | Runs Vitest in interactive watch mode                         |

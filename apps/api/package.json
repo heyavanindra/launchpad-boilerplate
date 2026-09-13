@@ -5,13 +5,12 @@
   "main": "dist/index.cjs",
   "type": "module",
   "scripts": {
-    "build": "esbuild src/index.ts src/worker.ts --platform=node --bundle --out-extension:.js=.cjs --external:pino --outdir=dist",
+    "build": "esbuild src/index.ts --platform=node --bundle --out-extension:.js=.cjs --external:pino --outdir=dist",
     "dev": "dotenvx run -f .env.development -- tsx watch src/index.ts",
-    "dev:worker": "dotenvx run -f .env.development -- tsx watch src/worker.ts",
     "start": "dotenvx run -f .env -- node dist/index.cjs",
-    "start:worker": "dotenvx run -f .env -- node dist/worker.cjs",
     "test": "vitest run",
     "test:watch": "vitest",
+    "check-types": "tsc --noEmit",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "fix": "eslint . --fix"
@@ -37,6 +36,8 @@
   },
   "dependencies": {
     "@repo/auth": "workspace:*",
+    "@repo/logger": "workspace:*",
+    "@repo/redis": "workspace:*",
     "@repo/validator": "workspace:*",
     "@aws-sdk/client-s3": "^3.1127.0",
     "@aws-sdk/s3-request-presigner": "^3.1127.0",

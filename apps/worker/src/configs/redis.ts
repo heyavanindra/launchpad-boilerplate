@@ -5,8 +5,8 @@ import {
   type Redis,
   type RedisOptions,
 } from '@repo/redis';
+import { logger } from '@repo/logger';
 import { configs } from './configs.js';
-import logger from '../lib/logger.js';
 
 export const redisConfig = getRedisConfig({
   host: configs.REDIS_HOST,
@@ -19,11 +19,11 @@ export const createRedisClient = (options?: Partial<CreateRedisOptions>): Redis 
     ...redisConfig,
     ...options,
     onConnect: () => {
-      logger.info('Connected to Redis successfully');
+      logger.info('Worker connected to Redis successfully');
       options?.onConnect?.();
     },
     onError: (err) => {
-      logger.error({ err }, 'Redis connection error');
+      logger.error({ err }, 'Worker Redis connection error');
       options?.onError?.(err);
     },
   });

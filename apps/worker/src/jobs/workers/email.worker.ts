@@ -1,4 +1,5 @@
 import { Worker } from 'bullmq';
+import { logger } from '@repo/logger';
 import { redisConnection } from '../../configs/redis.js';
 import { sendEmailHandler } from '../helpers/email.helper.js';
 
@@ -18,11 +19,11 @@ export const createEmailWorker = () => {
   );
 
   worker.on('completed', (job) => {
-    console.log(`[Job ${job.id}] Completed: ${job.name}`);
+    logger.info({ jobId: job.id, jobName: job.name }, `[Job ${job.id}] Completed: ${job.name}`);
   });
 
   worker.on('failed', (job, err) => {
-    console.error(`[Job ${job?.id}] Failed with error: ${err.message}`);
+    logger.error({ jobId: job?.id, err }, `[Job ${job?.id}] Failed with error: ${err.message}`);
   });
 
   return worker;
