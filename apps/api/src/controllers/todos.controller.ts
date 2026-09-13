@@ -2,7 +2,7 @@ import type { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import { sendSuccess } from '../helper/response-helper.js';
 import { TodoService } from '../services/todos.service.js';
-import type { TodoCreateInput, TodoIdParamInput } from '../validations/todo.validation.js';
+import type { TodoCreateInput, TodoIdParamInput } from '@repo/validator';
 
 export const createTodo = async (req: Request, res: Response, next: NextFunction) => {
   try {

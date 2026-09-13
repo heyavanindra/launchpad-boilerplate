@@ -1,0 +1,26 @@
+{
+  "name": "@repo/auth",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts",
+    "./auth": "./auth.ts"
+  },
+  "scripts": {
+    "check-types": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^26.4.1",
+    "typescript": "7.0.2"
+  },
+  "dependencies": {
+    "@repo/db": "workspace:*",
+    "better-auth": "^1.7.2"
+  }
+}

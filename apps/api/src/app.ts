@@ -3,12 +3,11 @@ import { StatusCodes } from 'http-status-codes';
 import { httpLogger } from './middlewares/http-logger.middleware.js';
 import errorHandler from './middlewares/error-handler.middleware.js';
 import v1Router from './routes/v1/index.js';
-import { toNodeHandler } from 'better-auth/node';
-import { auth } from './utils/auth.js';
 import helmet from 'helmet';
 import cors from 'cors';
 import { limiter } from './middlewares/ratelimiter.middleware.js';
 import { getSignedFileUrl } from './utils/s3uploader.js';
+import { auth, toNodeHandler } from '@repo/auth';
 
 const app: Express = express();
 

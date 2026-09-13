@@ -1,6 +1,6 @@
 import app from './app.js';
 import { configs } from './configs/configs.js';
-import { pool } from './db/client.js';
+import { pool } from '@repo/db/client';
 
 const server = app.listen(configs.PORT, () => {
   console.log(`

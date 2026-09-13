@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { TodoController } from '../../controllers/todos.controller.js';
 import { requireAuth } from '../../middlewares/auth.middleware.js';
 import { validateBody, validateParams } from '../../middlewares/validation.middleware.js';
-import { todoCreateSchema, todoIdParamSchema } from '../../validations/todo.validation.js';
+import { todoCreateSchema, todoIdParamSchema } from '@repo/validator';
 
 const TodoRouter: Router = Router();
 

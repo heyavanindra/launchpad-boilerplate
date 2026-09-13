@@ -1,4 +1,4 @@
-import type { NewTodo, Todo } from '../db/schema/todos.js';
+import type { NewTodo, Todo } from '@repo/db/schema';
 import { TodoRepository } from '../repository/todos.repository.js';
 
 const createTodo = async (data: NewTodo): Promise<Todo> => {

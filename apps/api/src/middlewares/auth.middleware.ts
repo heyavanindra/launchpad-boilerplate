@@ -1,7 +1,6 @@
 import type { NextFunction, Request, Response } from 'express';
-import { fromNodeHeaders } from 'better-auth/node';
 import { StatusCodes } from 'http-status-codes';
-import { auth } from '../utils/auth.js';
+import { auth, fromNodeHeaders } from '@repo/auth';
 import { AppError } from '../lib/errors.js';
 
 export const requireAuth = async (req: Request, _res: Response, next: NextFunction) => {

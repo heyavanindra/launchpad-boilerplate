@@ -1,7 +1,7 @@
 import { and, eq } from 'drizzle-orm';
 import { StatusCodes } from 'http-status-codes';
-import { db } from '../db/client.js';
-import { todoTable, type NewTodo, type Todo } from '../db/schema/todos.js';
+import { db } from '@repo/db/client';
+import { todoTable, type NewTodo, type Todo } from '@repo/db/schema';
 import { AppError } from '../lib/errors.js';
 
 export const createTodo = async (data: NewTodo): Promise<Todo> => {

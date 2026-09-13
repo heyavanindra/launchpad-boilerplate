@@ -1,13 +1,12 @@
-import { build } from 'esbuild';
+// esbuild.config.mjs
+import { build } from "esbuild";
 
 await build({
-  entryPoints: ['src/index.ts'],
+  entryPoints: ["src/index.ts"],
+  platform: "node",
+  target: "node22",
+  format: "esm",
   bundle: true,
-  platform: 'node',
-  target: 'node22',
-  format: 'esm',
-  outdir: 'dist',
   sourcemap: true,
-  minify: false,
-  packages: 'external',
+  outdir: "dist",
 });

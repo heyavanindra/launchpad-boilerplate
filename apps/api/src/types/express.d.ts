@@ -1,6 +1,4 @@
-import type { auth } from '../utils/auth.js';
-
-type AuthSession = typeof auth.$Infer.Session;
+import type { Session, User } from '@repo/auth';
 
 declare global {
   namespace Express {
@@ -8,8 +6,8 @@ declare global {
       validatedBody: unknown;
       validatedParams: unknown;
       validatedQuery: unknown;
-      user?: AuthSession['user'];
-      session?: AuthSession['session'];
+      user?: User;
+      session?: Session;
     }
   }
 }

@@ -1,159 +1,202 @@
-# Turborepo starter
+# 🚀 Launchpad
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern, production-grade, fullstack TypeScript monorepo boilerplate built with **Turborepo**, **pnpm Workspaces**, **Next.js**, **Express 5**, **Better Auth**, **Drizzle ORM**, and **PostgreSQL**.
 
-## Using this example
+---
 
-Run the following command:
+## 🏗️ Architecture & Workspaces
 
-```sh
-npx create-turbo@latest
+Launchpad is organized as an enterprise-ready monorepo with strict separation of concerns, centralized configuration, and type-safe shared packages:
+
+```text
+Launchpad/
+├── apps/
+│   ├── api/                  # Express 5 backend API (Node.js ESM, Layered Architecture)
+│   ├── web/                  # Next.js 16 frontend application (React 19, App Router)
+│   └── docs/                 # Next.js documentation portal
+│
+├── packages/
+│   ├── auth/                 # @repo/auth - Centralized Better Auth with Drizzle adapter
+│   ├── database/             # @repo/db - PostgreSQL client, Drizzle schemas & migrations
+│   ├── validator/            # @repo/validator - Shared Zod validation schemas & types
+│   ├── ui/                   # @repo/ui - Shared React component library
+│   ├── eslint-config/        # @repo/eslint-config - Shared ESLint rules
+│   └── typescript-config/    # @repo/typescript-config - Base tsconfig presets
+│
+├── turbo.json                # Turborepo task pipeline configuration
+├── pnpm-workspace.yaml       # pnpm workspace definition
+└── package.json              # Monorepo root scripts and devDependencies
 ```
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+## 🛠️ Tech Stack
 
-### Apps and Packages
+### Core Monorepo
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `@next/eslint-plugin-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- **Orchestration**: [Turborepo v2](https://turborepo.dev/)
+- **Package Manager**: [pnpm](https://pnpm.io/) (v11+)
+- **Runtime**: [Node.js](https://nodejs.org/) (>= 24) & [TypeScript](https://www.typescriptlang.org/) (ESM)
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Backend (`apps/api`)
 
-### Utilities
+- **Web Framework**: [Express 5](https://expressjs.com/) with ESM
+- **Layered Architecture**: Controller ➔ Service ➔ Repository pattern
+- **Authentication**: [Better Auth](https://www.better-auth.com/) via `@repo/auth`
+- **Database & ORM**: PostgreSQL & [Drizzle ORM](https://orm.drizzle.team/) via `@repo/db`
+- **Background Jobs**: [BullMQ](https://docs.bullmq.io/) & [ioredis](https://github.com/redis/ioredis)
+- **Object Storage**: AWS S3 SDK v3 (Direct presigned URL uploads)
+- **Validation**: [Zod](https://zod.dev/) via `@repo/validator`
+- **Observability**: [Pino](https://getpino.io/) & `pino-http` request tracing
+- **Security**: [Helmet](https://helmetjs.github.io/), [CORS](https://github.com/expressjs/cors), [express-rate-limit](https://express-rate-limit.mintlify.app/)
+- **Bundler & Tooling**: [esbuild](https://esbuild.github.io/), [tsx](https://github.com/privatenumber/tsx), [Vitest](https://vitest.dev/)
 
-This Turborepo has some additional tools already setup for you:
+### Frontend (`apps/web`)
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router, Server Components)
+- **UI Library**: React 19 & `@repo/ui`
+- **Styling**: Modern CSS / Tailwind-ready components
 
-### Build
+### Shared Packages (`packages/*`)
 
-To build all apps and packages, run the following command:
+- **`@repo/auth`**: Single source of truth for authentication. Configures Better Auth with Drizzle's PostgreSQL adapter and exports instances, type definitions (`Session`, `User`, `Auth`), and Node HTTP adapters (`toNodeHandler`, `fromNodeHeaders`).
+- **`@repo/db`**: Database layer containing the connection pool, Drizzle schemas (`auth-schema`, `todos`), and database migration/studio tooling.
+- **`@repo/validator`**: Centralized Zod validation schemas and inferred TypeScript types shared across API routes, controllers, and frontend forms.
+- **`@repo/ui`**: Shared, composable React UI components.
+- **`@repo/typescript-config`**: Shared TypeScript presets (`base.json`, `nextjs.json`, `react-library.json`).
+- **`@repo/eslint-config`**: Standardized ESLint rules across all workspaces.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+---
 
-```sh
-cd my-turborepo
-turbo build
+## 🚦 Getting Started
+
+### 1. Prerequisites
+
+- [Node.js](https://nodejs.org/) `>= 24.0.0`
+- [pnpm](https://pnpm.io/) `>= 11.0.0` (`npm install -g pnpm`)
+- Running [PostgreSQL](https://www.postgresql.org/) and [Redis](https://redis.io/) instances (or Docker)
+
+### 2. Installation
+
+Clone the repository and install all workspace dependencies:
+
+```bash
+git clone <your-repo-url> Launchpad
+cd Launchpad
+pnpm install
 ```
 
-Without global `turbo`, use your package manager:
+### 3. Environment Setup
 
-```sh
-cd my-turborepo
-npx turbo build
-pnpm exec turbo build
-pnpm exec turbo build
+Configure your environment variables for the workspaces:
+
+#### Database (`packages/database/.env.development`):
+
+```env
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/launchpad_dev"
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+#### API (`apps/api/.env.development`):
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo build --filter=docs
+```env
+PORT=4000
+NODE_ENV=development
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/launchpad_dev"
+BETTER_AUTH_SECRET="your-better-auth-secret-min-32-chars"
+BETTER_AUTH_URL="http://localhost:4000"
+REDIS_HOST="localhost"
+REDIS_PORT=6379
+AWS_REGION="us-east-1"
+AWS_ACCESS_KEY_ID="your-access-key"
+AWS_SECRET_ACCESS_KEY="your-secret-key"
+AWS_BUCKET_NAME="your-s3-bucket"
 ```
 
-Without global `turbo`:
+### 4. Push Database Schema
 
-```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+Push the Drizzle schemas (including Better Auth tables and Todos) to your database:
+
+```bash
+pnpm --filter @repo/db db:push
 ```
 
-### Develop
+### 5. Run Development Servers
 
-To develop all apps and packages, run the following command:
+Start all applications and services in parallel:
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
+```bash
+pnpm dev
 ```
 
-Without global `turbo`, use your package manager:
+This will concurrently run:
 
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
+- **`apps/api`**: `http://localhost:4000`
+- **`apps/web`**: `http://localhost:3000`
+- **`apps/docs`**: `http://localhost:3001`
+
+---
+
+## 💻 Common Commands
+
+### Development & Build
+
+| Command            | Description                                  |
+| :----------------- | :------------------------------------------- |
+| `pnpm dev`         | Start development servers across all apps    |
+| `pnpm build`       | Build all apps and packages for production   |
+| `pnpm check-types` | Run type checking across the entire monorepo |
+| `pnpm lint`        | Lint all workspaces with ESLint              |
+| `pnpm format`      | Format code using Prettier                   |
+
+### Workspace Filtering
+
+Turborepo and pnpm allow running commands on specific workspaces:
+
+```bash
+# Run only the API dev server
+pnpm --filter api dev
+
+# Run type check only on auth and db packages
+pnpm --filter @repo/auth --filter @repo/db check-types
+
+# Build only the web application
+pnpm --filter web build
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### Database Management (`@repo/db`)
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+| Command                              | Description                                              |
+| :----------------------------------- | :------------------------------------------------------- |
+| `pnpm --filter @repo/db db:push`     | Push schema changes directly to PostgreSQL (development) |
+| `pnpm --filter @repo/db db:generate` | Generate SQL migration files from schema                 |
+| `pnpm --filter @repo/db db:migrate`  | Execute pending SQL migrations                           |
+| `pnpm --filter @repo/db db:studio`   | Open interactive Drizzle Studio interface                |
 
-```sh
-turbo dev --filter=web
+---
+
+## 🔒 Authentication (`@repo/auth`)
+
+Better Auth is encapsulated within `@repo/auth` using PostgreSQL tables managed by `@repo/db`.
+
+To consume authentication in an app:
+
+```typescript
+// Mount Better Auth handler (Express)
+import { auth, toNodeHandler } from '@repo/auth';
+app.all('/api/auth/*splat', toNodeHandler(auth));
+
+// Verify session in middleware
+import { auth, fromNodeHeaders } from '@repo/auth';
+const session = await auth.api.getSession({
+  headers: fromNodeHeaders(req.headers),
+});
+
+// Type-safe session & user
+import type { Session, User } from '@repo/auth';
 ```
 
-Without global `turbo`:
+---
 
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+## 📜 License
 
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+This project is licensed under the [ISC License](LICENSE).
