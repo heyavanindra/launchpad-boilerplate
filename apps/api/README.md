@@ -279,22 +279,22 @@ Content-Type: application/json
 
 ## 📜 Available Scripts
 
-| Script              | Command                                                      | Description                                                   |
-| :------------------ | :----------------------------------------------------------- | :------------------------------------------------------------ |
-| `pnpm dev`          | `dotenvx run -f .env.development -- tsx watch src/index.ts`  | Starts API development server with live reload                |
-| `pnpm build`        | `esbuild src/index.ts ...`                                   | Bundles TypeScript into production JavaScript in `dist/`      |
-| `pnpm start`        | `dotenvx run -f .env -- node dist/index.js`                  | Runs compiled production API server                           |
-| `pnpm test`         | `vitest run`                                                 | Runs test suite once via Vitest                               |
-| `pnpm test:watch`   | `vitest`                                                     | Runs Vitest in interactive watch mode                         |
-| `pnpm typecheck`    | `tsc --noEmit`                                               | Runs TypeScript type checking without emitting files          |
-| `pnpm lint`         | `eslint .`                                                   | Checks for linting errors across the codebase                 |
-| `pnpm fix`          | `eslint . --fix`                                             | Automatically fixes autofixable lint issues                   |
-| `pnpm format`       | `prettier --write .`                                         | Formats all files using Prettier                              |
-| `pnpm format:check` | `prettier --check .`                                         | Verifies formatting of all files against Prettier rules       |
-| `pnpm db:push`      | `dotenvx run -f .env.development -- drizzle-kit push`        | Pushes Drizzle schema definitions directly to database        |
-| `pnpm db:generate`  | `dotenvx run -f .env.development -- drizzle-kit generate`    | Generates migration SQL files based on schema changes         |
-| `pnpm db:migrate`   | `dotenvx run -f .env.development -- drizzle-kit migrate`     | Executes pending database migrations                          |
-| `pnpm db:studio`    | `dotenvx run -f .env.development -- drizzle-kit studio`      | Launches Drizzle Studio Web GUI for managing database records |
+| Script              | Command                                                     | Description                                                   |
+| :------------------ | :---------------------------------------------------------- | :------------------------------------------------------------ |
+| `pnpm dev`          | `dotenvx run -f .env.development -- tsx watch src/index.ts` | Starts API development server with live reload                |
+| `pnpm build`        | `esbuild src/index.ts ...`                                  | Bundles TypeScript into production JavaScript in `dist/`      |
+| `pnpm start`        | `dotenvx run -f .env -- node dist/index.js`                 | Runs compiled production API server                           |
+| `pnpm test`         | `vitest run`                                                | Runs test suite once via Vitest                               |
+| `pnpm test:watch`   | `vitest`                                                    | Runs Vitest in interactive watch mode                         |
+| `pnpm typecheck`    | `tsc --noEmit`                                              | Runs TypeScript type checking without emitting files          |
+| `pnpm lint`         | `eslint .`                                                  | Checks for linting errors across the codebase                 |
+| `pnpm fix`          | `eslint . --fix`                                            | Automatically fixes autofixable lint issues                   |
+| `pnpm format`       | `prettier --write .`                                        | Formats all files using Prettier                              |
+| `pnpm format:check` | `prettier --check .`                                        | Verifies formatting of all files against Prettier rules       |
+| `pnpm db:push`      | `dotenvx run -f .env.development -- drizzle-kit push`       | Pushes Drizzle schema definitions directly to database        |
+| `pnpm db:generate`  | `dotenvx run -f .env.development -- drizzle-kit generate`   | Generates migration SQL files based on schema changes         |
+| `pnpm db:migrate`   | `dotenvx run -f .env.development -- drizzle-kit migrate`    | Executes pending database migrations                          |
+| `pnpm db:studio`    | `dotenvx run -f .env.development -- drizzle-kit studio`     | Launches Drizzle Studio Web GUI for managing database records |
 
 ---
 

@@ -1,5 +1,5 @@
 import { Queue } from 'bullmq';
-import { getRedisConfig} from "@repo/redis"
+import { getRedisConfig } from '@repo/redis';
 export const emailQueue = new Queue('email-queue', {
   connection: getRedisConfig(),
   defaultJobOptions: {
