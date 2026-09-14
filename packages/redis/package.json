@@ -10,7 +10,8 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "ioredis": "^6.0.0"
+    "ioredis": "^6.0.0",
+    "@repo/env":"workspace:*"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

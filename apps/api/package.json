@@ -39,6 +39,7 @@
     "@repo/logger": "workspace:*",
     "@repo/redis": "workspace:*",
     "@repo/validator": "workspace:*",
+    "@repo/env":"workspace:*",
     "@aws-sdk/client-s3": "^3.1127.0",
     "@aws-sdk/s3-request-presigner": "^3.1127.0",
     "@dotenvx/dotenvx": "^2.22.0",

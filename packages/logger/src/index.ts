@@ -1,8 +1,9 @@
 import pino, { type Logger, type LoggerOptions } from 'pino';
+import { configs } from './configs/configs.js';
 
 export const createLogger = (options?: LoggerOptions): Logger => {
-  const isProduction = process.env.NODE_ENV === 'production';
-  const level = options?.level || process.env.LOG_LEVEL || (isProduction ? 'info' : 'debug');
+  const isProduction = configs.NODE_ENV === 'production';
+  const level = options?.level || configs.LOG_LEVEL || (isProduction ? 'info' : 'debug');
 
   return pino({
     level,

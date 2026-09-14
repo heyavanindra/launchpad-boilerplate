@@ -1,4 +1,5 @@
 import { Redis, type RedisOptions } from 'ioredis';
+import { configs } from './configs/configs.js';
 
 export interface CreateRedisOptions extends RedisOptions {
   url?: string;
@@ -7,10 +8,10 @@ export interface CreateRedisOptions extends RedisOptions {
 }
 
 export const getRedisConfig = (options?: Partial<RedisOptions>): RedisOptions => ({
-  host: process.env.REDIS_HOST || '127.0.0.1',
-  port: Number(process.env.REDIS_PORT) || 6379,
-  password: process.env.REDIS_PASSWORD || undefined,
-  maxRetriesPerRequest: null, // Required by BullMQ
+  host: configs.REDIS_HOST,
+  port: configs.REDIS_PORT,
+  password: configs.REDIS_PASSWORD,
+  maxRetriesPerRequest: null,
   retryStrategy(times: number) {
     return Math.min(times * 50, 2000);
   },
@@ -18,7 +19,7 @@ export const getRedisConfig = (options?: Partial<RedisOptions>): RedisOptions =>
 });
 
 export const createRedisClient = (options?: CreateRedisOptions): Redis => {
-  const url = options?.url || process.env.REDIS_URL;
+  const url = options?.url || configs.REDIS_URL;
   const config = getRedisConfig(options);
 
   const client = url ? new Redis(url, config) : new Redis(config);

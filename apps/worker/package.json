@@ -12,6 +12,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@repo/env":"workspace:*",
     "@dotenvx/dotenvx": "^2.22.0",
     "@repo/logger": "workspace:*",
     "@repo/redis": "workspace:*",
