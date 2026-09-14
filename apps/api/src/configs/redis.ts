@@ -1,34 +1,14 @@
-import {
-  createRedisClient as createBaseRedisClient,
-  getRedisConfig,
-  type CreateRedisOptions,
-  type Redis,
-  type RedisOptions,
-} from '@repo/redis';
+import { createRedisClient, type RedisOptions } from '@repo/redis';
 import { configs } from './configs.js';
-import logger from '../lib/logger.js';
 
-export const redisConfig = getRedisConfig({
+export const redisConfig: RedisOptions = {
   host: configs.REDIS_HOST,
   port: configs.REDIS_PORT,
   password: configs.REDIS_PASSWORD,
-});
-
-export const createRedisClient = (options?: Partial<CreateRedisOptions>): Redis => {
-  return createBaseRedisClient({
-    ...redisConfig,
-    ...options,
-    onConnect: () => {
-      logger.info('Connected to Redis successfully');
-      options?.onConnect?.();
-    },
-    onError: (err) => {
-      logger.error({ err }, 'Redis connection error');
-      options?.onError?.(err);
-    },
-  });
+  maxRetriesPerRequest: null,
+  retryStrategy(times: number) {
+    return Math.min(times * 50, 2000);
+  },
 };
 
-export const redisConnection = createRedisClient();
-
-export { Redis, type RedisOptions };
+export const redisConnection = createRedisClient(redisConfig);

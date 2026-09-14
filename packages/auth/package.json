@@ -20,7 +20,6 @@
     "typescript": "7.0.2"
   },
   "dependencies": {
-    "@repo/db": "workspace:*",
     "better-auth": "^1.7.2"
   }
 }

@@ -10,9 +10,8 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "pino": "^10.3.1",
-    "@repo/env":"workspace:*"
-  },
+    "pino": "^10.3.1"
+ },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^26.4.1",

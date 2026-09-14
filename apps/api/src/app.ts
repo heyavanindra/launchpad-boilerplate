@@ -7,7 +7,8 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { limiter } from './middlewares/ratelimiter.middleware.js';
 import { getSignedFileUrl } from './utils/s3uploader.js';
-import { auth, toNodeHandler } from '@repo/auth';
+import { toNodeHandler } from '@repo/auth';
+import { auth } from './lib/auth.js';
 
 const app: Express = express();
 

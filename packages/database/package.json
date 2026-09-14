@@ -18,8 +18,7 @@
   },
   "dependencies": {
     "drizzle-orm": "1.0.0-rc.4",
-    "pg": "^8.23.0",
-    "@repo/env":"workspace:*"
+    "pg": "^8.23.0"
   },
   "devDependencies": {
     "@dotenvx/dotenvx": "^2.22.0",

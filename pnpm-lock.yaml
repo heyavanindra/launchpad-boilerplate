@@ -243,9 +243,6 @@ importers:
 
   packages/auth:
     dependencies:
-      '@repo/db':
-        specifier: workspace:*
-        version: link:../database
       better-auth:
         specifier: ^1.7.2
         version: 1.7.3(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.0)(zod@4.5.4))(next@16.3.4(@babel/core@8.0.1)(@types/node@26.4.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -262,9 +259,6 @@ importers:
 
   packages/database:
     dependencies:
-      '@repo/env':
-        specifier: workspace:*
-        version: link:../env
       drizzle-orm:
         specifier: 1.0.0-rc.4
         version: 1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.0)(zod@4.5.4)
@@ -356,9 +350,6 @@ importers:
 
   packages/logger:
     dependencies:
-      '@repo/env':
-        specifier: workspace:*
-        version: link:../env
       pino:
         specifier: ^10.3.1
         version: 10.3.1
@@ -378,9 +369,6 @@ importers:
 
   packages/redis:
     dependencies:
-      '@repo/env':
-        specifier: workspace:*
-        version: link:../env
       ioredis:
         specifier: ^6.0.0
         version: 6.0.0(supports-color@7.2.0)

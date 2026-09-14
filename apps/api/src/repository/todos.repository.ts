@@ -1,6 +1,6 @@
 import { and, eq } from 'drizzle-orm';
 import { StatusCodes } from 'http-status-codes';
-import { db } from '@repo/db/client';
+import { db } from '../lib/db.js';
 import { todoTable, type NewTodo, type Todo } from '@repo/db/schema';
 import { AppError } from '../lib/errors.js';
 

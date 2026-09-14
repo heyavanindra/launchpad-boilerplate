@@ -1,19 +1,21 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { authSchema, db } from '@repo/db';
+import { authSchema, createDb } from '@repo/db';
+import { fromNodeHeaders } from 'better-auth/node';
 
-export const auth = betterAuth({
-  database: drizzleAdapter(db, {
-    provider: 'pg',
-    schema: {
-      user: authSchema.user,
-      session: authSchema.session,
-      account: authSchema.account,
-      verification: authSchema.verification,
-    },
-  }),
-});
+export function createAuth({ databaseUrl }: { databaseUrl: string }) {
+  const { db } = createDb({ databaseUrl });
+  return betterAuth({
+    database: drizzleAdapter(db, {
+      provider: 'pg',
+      schema: {
+        user: authSchema.user,
+        session: authSchema.session,
+        account: authSchema.account,
+        verification: authSchema.verification,
+      },
+    }),
+  });
+}
 
-export type Auth = typeof auth;
-export type Session = typeof auth.$Infer.Session.session;
-export type User = typeof auth.$Infer.Session.user;
+export { fromNodeHeaders };
