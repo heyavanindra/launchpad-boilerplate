@@ -4,9 +4,9 @@
   "description": "",
   "private": true,
   "exports": {
-    ".": "./db/index.ts",
-    "./client": "./db/client.ts",
-    "./schema": "./db/schema/index.ts"
+    ".": "./src/index.ts",
+    "./client": "./src/client.ts",
+    "./schema": "./src/schema/index.ts"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

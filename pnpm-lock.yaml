@@ -37,7 +37,7 @@ importers:
         version: link:../../packages/auth
       '@repo/db':
         specifier: workspace:*
-        version: link:../../packages/database
+        version: link:../../packages/db
       '@repo/env':
         specifier: workspace:*
         version: link:../../packages/env
@@ -245,7 +245,7 @@ importers:
     dependencies:
       '@repo/db':
         specifier: workspace:*
-        version: link:../database
+        version: link:../db
       better-auth:
         specifier: ^1.7.2
         version: 1.7.3(drizzle-kit@1.0.0-rc.4)(drizzle-orm@1.0.0-rc.4(@types/pg@8.23.1)(pg@8.23.0)(zod@4.5.4))(next@16.3.4(@babel/core@8.0.1)(@types/node@26.4.1)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(pg@8.23.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -260,7 +260,7 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
 
-  packages/database:
+  packages/db:
     dependencies:
       drizzle-orm:
         specifier: 1.0.0-rc.4

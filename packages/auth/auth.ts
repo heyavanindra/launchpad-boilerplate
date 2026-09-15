@@ -1,6 +1,6 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { authSchema, createDb, type Database } from '@repo/db';
+import { authSchema, type Database } from '@repo/db';
 import { fromNodeHeaders } from 'better-auth/node';
 
 export function createAuth({ db }: { db: Database }) {
