@@ -1,7 +1,7 @@
 import { Redis, type RedisOptions } from 'ioredis';
 
 export const createRedisClient = (redisConfig: RedisOptions): Redis => {
-  const client = new Redis(redisConfig as unknown as Record<string, unknown>);
+  const client = new Redis(redisConfig);
 
   client.on('connect', () => {
     console.log('Connected to Redis successfully');
@@ -14,4 +14,4 @@ export const createRedisClient = (redisConfig: RedisOptions): Redis => {
   return client;
 };
 
-export type { RedisOptions };
+export { Redis, type RedisOptions };

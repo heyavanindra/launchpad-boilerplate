@@ -1,7 +1,7 @@
 import { createAuth } from '@repo/auth';
-import { configs } from '../configs/configs.js';
+import { db } from './db.js';
 
-export const auth = createAuth({ databaseUrl: configs.DATABASE_URL });
+export const auth = createAuth({ db });
 
 export type Auth = typeof auth;
 export type Session = typeof auth.$Infer.Session.session;

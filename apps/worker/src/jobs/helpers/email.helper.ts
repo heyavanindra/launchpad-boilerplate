@@ -1,4 +1,4 @@
-import { logger } from '@repo/logger';
+import { logger } from '../../lib/logger.js';
 
 export interface SendEmailPayload {
   to: string;

@@ -1,10 +1,9 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { authSchema, createDb } from '@repo/db';
+import { authSchema, createDb, type Database } from '@repo/db';
 import { fromNodeHeaders } from 'better-auth/node';
 
-export function createAuth({ databaseUrl }: { databaseUrl: string }) {
-  const { db } = createDb({ databaseUrl });
+export function createAuth({ db }: { db: Database }) {
   return betterAuth({
     database: drizzleAdapter(db, {
       provider: 'pg',
