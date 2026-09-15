@@ -1,2 +1,3 @@
-export * from './client.js';
-export * from './schema/index.js';
+export * from './schema/auth-schema.js';
+export * as authSchema from './schema/auth-schema.js';
+export * from './schema/todos.js';

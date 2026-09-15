@@ -1,5 +1,5 @@
 import { logger } from './lib/logger.js';
-import { redisConnection } from './configs/redis.js';
+import { redisConnection } from './lib/redis.js';
 import { createEmailWorker } from './jobs/workers/email.worker.js';
 
 const emailWorker = createEmailWorker();

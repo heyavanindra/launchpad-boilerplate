@@ -8,8 +8,7 @@
     "build": "esbuild src/index.ts --platform=node --bundle --out-extension:.js=.cjs --external:pino --outdir=dist",
     "dev": "dotenvx run -f .env.development -- tsx watch src/index.ts",
     "start": "dotenvx run -f .env -- node dist/index.cjs",
-    "check-types": "tsc --noEmit",
-    "typecheck": "tsc --noEmit"
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@repo/env":"workspace:*",

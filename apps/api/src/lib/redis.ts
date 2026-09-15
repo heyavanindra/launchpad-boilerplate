@@ -1,5 +1,5 @@
-import { createRedisClient, type Redis, type RedisOptions } from '@repo/redis';
-import { configs } from './configs.js';
+import { createRedisClient, type RedisOptions } from '@repo/redis';
+import { configs } from '../configs/configs.js';
 
 export const redisConfig: RedisOptions = {
   host: configs.REDIS_HOST,
@@ -12,5 +12,3 @@ export const redisConfig: RedisOptions = {
 };
 
 export const redisConnection = createRedisClient(redisConfig);
-
-export { Redis, type RedisOptions };

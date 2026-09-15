@@ -1,7 +1,7 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { authSchema, type Database } from '@repo/db';
-import { fromNodeHeaders } from 'better-auth/node';
+import { type Database } from '@repo/db/client';
+import { authSchema } from '@repo/db/schema';
 
 export function createAuth({ db }: { db: Database }) {
   return betterAuth({
@@ -16,5 +16,3 @@ export function createAuth({ db }: { db: Database }) {
     }),
   });
 }
-
-export { fromNodeHeaders };

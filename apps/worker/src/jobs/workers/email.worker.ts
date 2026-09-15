@@ -1,6 +1,6 @@
 import { Worker } from 'bullmq';
 import { logger } from '../../lib/logger.js';
-import { redisConnection } from '../../configs/redis.js';
+import { redisConnection } from '../../lib/redis.js';
 import { sendEmailHandler } from '../helpers/email.helper.js';
 
 export const createEmailWorker = () => {

@@ -4,12 +4,10 @@
   "description": "",
   "private": true,
   "exports": {
-    ".": "./src/index.ts",
     "./client": "./src/client.ts",
-    "./schema": "./src/schema/index.ts"
+    "./schema": "./src/index.ts"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "check-types": "tsc --noEmit",
     "db:push": "dotenvx run -f .env.development -- drizzle-kit push",
     "db:studio": "dotenvx run -f .env.development -- drizzle-kit studio",
