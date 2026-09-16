@@ -9,11 +9,11 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@repo/redis": "workspace:*",
     "bullmq": "^5.0.0"
   },
   "devDependencies": {
-    "@repo/typescript-config": "workspace:*"
+    "@repo/typescript-config": "workspace:*",
+    "ioredis": "^6.0.0"
   },
   "keywords": [],
   "author": "",

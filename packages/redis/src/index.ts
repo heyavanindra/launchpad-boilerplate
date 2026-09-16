@@ -1,14 +1,19 @@
 import { Redis, type RedisOptions } from 'ioredis';
 
-export const createRedisClient = (redisConfig: RedisOptions): Redis => {
+type Logger = {
+  info: (msg: string) => void;
+  error: ({ err }: { err: Error }, msg: string) => void;
+};
+
+export const createRedisClient = (redisConfig: RedisOptions, logger?: Logger): Redis => {
   const client = new Redis(redisConfig);
 
   client.on('connect', () => {
-    console.log('Connected to Redis successfully');
+    logger?.info('Connected to Redis successfully');
   });
 
   client.on('error', (err) => {
-    console.error({ err }, 'Redis connection error');
+    logger?.error({ err }, 'Redis connection error');
   });
 
   return client;

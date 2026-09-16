@@ -340,9 +340,6 @@ importers:
 
   packages/jobs:
     dependencies:
-      '@repo/redis':
-        specifier: workspace:*
-        version: link:../redis
       bullmq:
         specifier: ^5.0.0
         version: 5.81.5(supports-color@7.2.0)
@@ -350,6 +347,9 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
+      ioredis:
+        specifier: ^6.0.0
+        version: 6.0.0(supports-color@7.2.0)
 
   packages/logger:
     dependencies:

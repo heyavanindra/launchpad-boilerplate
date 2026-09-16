@@ -1,5 +1,5 @@
 import { Queue, type QueueOptions } from 'bullmq';
-import type { RedisOptions } from '@repo/redis';
+import type { RedisOptions } from 'ioredis';
 
 export interface CreateEmailQueueOptions extends Partial<QueueOptions> {
   connection: RedisOptions;
