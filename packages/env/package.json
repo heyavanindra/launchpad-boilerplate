@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^22.20.2"
+    "@types/node": "catalog:tooling",
+    "typescript": "catalog:tooling"
   },
   "dependencies": {
     "zod": "^4.5.4"

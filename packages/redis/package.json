@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
-    "@types/node": "^26.4.1",
-    "typescript": "7.0.2"
+    "@types/node": "catalog:tooling",
+    "typescript": "catalog:tooling"
   }
 }

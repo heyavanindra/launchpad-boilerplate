@@ -14,7 +14,7 @@
     "husky": "^9.1.7",
     "prettier": "3.9.6",
     "turbo": "^2.10.12",
-    "typescript": "7.0.2"
+    "typescript": "catalog:tooling"
   },
   "packageManager": "pnpm@11.25.0",
   "engines": {
